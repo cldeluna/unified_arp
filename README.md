@@ -3,7 +3,7 @@
   <h1>Unified ARP Tool</h1>
 </div>
 
-A modern web application built with Solara for viewing and analyzing ARP (Address Resolution Protocol) data across network namespaces.   This serves as an example of using the SuzieQ REST API to gather data you might need to solve a specific problem.
+This serves as an example of using the SuzieQ REST API to gather data you might need to solve a specific problem.
 
 ## GOAL
 
@@ -12,9 +12,9 @@ This repository serves as an example of:
 - some handy "ready to use" functions to extract ARP (and ultimately other) data from your SuzieQ Enterprise server. 
   - The `try_sq_rest_call` function in utils.py can serve as a foundation for all your REST calls to SuzieQ.  Division of labor has the rest call handling things like crafting the call itself, and other functions can provide the API endpoints. We use this strategy in production environments
 - an example of using Solara as a user (or network engineer) front end to share your scripts
-  - I do like the "cleaner" Solara front end but there is a steeper learning cuve with Solara. I could have created this repository in about 20 minutes using Streamlit (but I am more familiar with Streamlit)
+  - I do like the "cleaner" Solara front end but there is a steeper learning cuve with Solara. I could have created this repository in about 20 minutes using Streamlit (Note: I am more familiar with Streamlit but instead I spent several frustrating hours with my basic Solara knowledge and AI "help" learning absolutely nothing to create this)
 
-This little APP does nothing different than the SuzieQ GUI or CLI does but think about what you could do with your own scripts and workflows with this data.   
+This little APP does nothing different than the SuzieQ GUI or CLI does ... but think about what you could do with your own scripts and workflows with this data.   
 
 - What if you had to track the history of a particular MAC over the last week or months?
 - What if you had other find a MAC that fell off the network (last seen), find the last switch and interface it was connected to and determine what MAC is on that interface now?
@@ -100,12 +100,22 @@ uv run solara run UnifiedARP_APP.py
 
 The application will be available at: http://localhost:8765
 
+
+
+## Troubleshooting the APP
+
+- **No namespaces found**: Verify your SuzieQ server is running and accessible
+- **Connection errors**: Check your `.env` file for correct API credentials
+- **UI issues**: Clear your browser cache if the UI doesn't update
+
+---
+
 ## Solara vs Streamlit
 
 ### Advantages of Solara
 - **Performance**: Built on React, offering better performance for complex UIs
 - **Component-based**: More flexible and reusable UI components
-- **State Management**: Better state management for complex applications
+- **State Management**: Better state management for complex applications <--This is where Solara wins in my view
 - **Custom Styling**: More control over the look and feel
 
 ### Disadvantages of Solara
@@ -114,22 +124,16 @@ The application will be available at: http://localhost:8765
 - **Less Batteries-Included**: Requires more manual setup for common features
 
 ### When to Use Solara
-- Building complex, production-grade applications
+- Building complex, production-grade applications, which require lots of "state" management
 - Need for custom UI components
 - Performance is a critical requirement
 - You're comfortable with React-like components
 
 ### When to Use Streamlit
-- Quick prototypes and MVPs
+- Quick prototypes
 - Simpler applications with standard UI components
-- When development speed is more important than customization
-- When you want access to a larger ecosystem of components
-
-## Troubleshooting
-
-- **No namespaces found**: Verify your SuzieQ server is running and accessible
-- **Connection errors**: Check your `.env` file for correct API credentials
-- **UI issues**: Clear your browser cache if the UI doesn't update
+- When development speed is more important than customization 
+- When you want access to a larger ecosystem of components and support
 
 ## License
 
