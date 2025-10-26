@@ -322,15 +322,63 @@ def NamespaceSelector():
                     # Apply the renames
                     styled_df = styled_df.rename(columns=column_renames)
                     
-                    # Display the ARP table
+                    # Use use_state to maintain search state within the component
+                    search_term, set_search_term = solara.use_state("")
+                    search_type, set_search_type = solara.use_state("ip")  # 'ip' or 'mac'
+                    
+                    # Filter function
+                    def filter_arp_data():
+                        if not search_term:
+                            return styled_df
+                        
+                        if search_type == "ip":
+                            return styled_df[styled_df['IP Address'].astype(str).str.contains(search_term, case=False, na=False)]
+                        else:  # mac
+                            # Create a copy of the dataframe to avoid SettingWithCopyWarning
+                            df_search = styled_df.copy()
+                            # Convert MAC addresses to a searchable format (uppercase, no separators)
+                            df_search['search_mac'] = df_search['MAC Address'].astype(str).str.upper().str.replace(r'[^A-F0-9]', '', regex=True)
+                            # Clean the search term
+                            search_mac = ''.join(c.upper() for c in search_term if c.isalnum())
+                            # Filter the dataframe
+                            filtered = df_search[df_search['search_mac'].str.contains(search_mac, na=False)]
+                            # Drop the temporary column
+                            return filtered.drop(columns=['search_mac'], errors='ignore')
+                    
+                    filtered_df = filter_arp_data()
+                    
+                    # Display the ARP table with search controls
                     with solara.Card(style={"overflow-x": "auto"}):
                         solara.Markdown("### ARP Table")
                         
+                        # Search controls
+                        with solara.Row(justify="center", style={"margin-bottom": "16px"}):
+                            solara.Select(
+                                label="Search by",
+                                value=search_type,
+                                values=["ip", "mac"],
+                                on_value=set_search_type,
+                                style={"min-width": "120px", "margin-right": "16px"}
+                            )
+                            solara.InputText(
+                                label=f"Search by {search_type.upper()}",
+                                value=search_term,
+                                on_value=set_search_term,
+                                continuous_update=True,
+                                style={"flex-grow": 1}
+                            )
+                        
                         # Display the data grid
-                        solara.DataFrame(
-                            styled_df,
-                            items_per_page=20
-                        )
+                        if len(filtered_df) > 0:
+                            solara.Markdown(f"Showing {len(filtered_df)} of {len(styled_df)} entries")
+                            solara.DataFrame(
+                                filtered_df,
+                                items_per_page=20
+                            )
+                        else:
+                            solara.Markdown(f"No entries found matching the search criteria.", style={"color": "#666", "font-style": "italic"})
+                            if search_term:  # Only show the clear button if there's a search term
+                                solara.Button("Clear search", on_click=lambda: set_search_term(""))
                 else:
                     solara.Markdown("No ARP data available for the selected namespace.")
 
