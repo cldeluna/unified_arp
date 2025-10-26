@@ -357,7 +357,7 @@ def Page():
         # Header Section
         # ====================
         with solara.Row(style={
-            "background-color": "#d32f2f",  # Red 700 from Material Design
+            "background-color": "#1a1a1a",  # Dark grey background
             "color": "white",
             "padding": "10px 24px",
             "margin-bottom": "24px",
