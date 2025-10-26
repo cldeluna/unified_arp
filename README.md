@@ -1,20 +1,36 @@
-# Unified ARP Tool
+<div align="center">
+  <img src="assets/EIA Logo FINAL small_Dark Background.png" alt="EIA Logo" width="300">
+  <h1>Unified ARP Tool</h1>
+</div>
 
-A modern web application built with Solara for viewing and analyzing ARP (Address Resolution Protocol) data across network namespaces. This tool provides a user-friendly interface to monitor and troubleshoot network connectivity issues.
+A modern web application built with Solara for viewing and analyzing ARP (Address Resolution Protocol) data across network namespaces.   This serves as an example of using the SuzieQ REST API to gather data you might need to solve a specific problem.
+
+## GOAL
+
+This repository serves as an example of:
+
+- some handy "ready to use" functions to extract ARP (and ultimately other) data from your SuzieQ Enterprise server. 
+  - The `try_sq_rest_call` function in utils.py can serve as a foundation for all your REST calls to SuzieQ.  Division of labor has the rest call handling things like crafting the call itself, and other functions can provide the API endpoints. We use this strategy in production environments
+- an example of using Solara as a user (or network engineer) front end to share your scripts
+  - I do like the "cleaner" Solara front end but there is a steeper learning cuve with Solara. I could have created this repository in about 20 minutes using Streamlit (but I am more familiar with Streamlit)
+
+This little APP does nothing different than the SuzieQ GUI or CLI does but think about what you could do with your own scripts and workflows with this data.   
+
+- What if you had to track the history of a particular MAC over the last week or months?
+- What if you had other find a MAC that fell off the network (last seen), find the last switch and interface it was connected to and determine what MAC is on that interface now?
+
+The possibilities are endless...
 
 ## Features
 
-- View ARP tables across multiple network namespaces
-- Real-time data visualization
+- View ARP tables across multiple network devices (multi-vendor) at a locaton (namespace)
 - Responsive design that works on desktop and mobile
-- Dark theme with professional styling
-- Easy-to-use interface for network administrators
 
 ## Prerequisites
 
 - Python 3.8 or higher
 - [uv](https://github.com/astral-sh/uv) - A fast Python package installer and resolver
-- Network access to your SuzieQ Enterprise Server
+- Network access (API Token) to your SuzieQ Enterprise Server
 
 ## Installation
 
@@ -34,7 +50,7 @@ A modern web application built with Solara for viewing and analyzing ARP (Addres
    ```bash
    uv pip install -e .
    ```
-   
+
    This will install all the dependencies listed in `pyproject.toml` in development mode.
 
    - Installs the package in development/editable mode
@@ -47,14 +63,18 @@ A modern web application built with Solara for viewing and analyzing ARP (Addres
    ```bash
    uv pip install "solara>=1.54.0" "python-dotenv>=1.2.1" "pandas>=2.3.3"
    ```
-   
+
    This will install all the dependencies listed in `pyproject.toml` in development mode.
 
-    - Installs only the essential runtime dependencies
-    - More lightweight installation
-    - Better for production deployments
-    - Doesn't include development tools
+- Installs only the essential runtime dependencies
 
+- More lightweight installation
+
+- Better for production deployments
+
+- Doesn't include development tools
+
+  
 
 ## Configuration
 
