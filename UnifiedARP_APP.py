@@ -356,19 +356,34 @@ def Page():
         # ====================
         # Header Section
         # ====================
-        with solara.Column(style={
+        with solara.Row(style={
             "background-color": "#d32f2f",  # Red 700 from Material Design
             "color": "white",
-            "padding": "16px 24px",
-            "margin-bottom": "24px"
+            "padding": "10px 24px",
+            "margin-bottom": "24px",
+            "display": "flex",
+            "justify-content": "space-between",
+            "align-items": "center"
         }):
+            # Logo with right margin
+            solara.Image("assets/EIA Logo FINAL small_Dark Background.png",
+                        width="200px",
+                        classes=["mr-4"])
+            
+            # Title
+            solara.Markdown("# Unified ARP Tool", 
+                          style={
+                              "margin": "0",
+                              "color": "white",
+                              "flex-grow": "1",
+                              "text-align": "center"
+                          })
+            
+            # Placeholder to balance the layout (same width as logo for symmetry)
+            solara.HTML("div", style={"width": "200px"})
+            
             # Set the browser tab title
             solara.Title("Unified ARP Tool")
-            # Main page heading with white text
-            solara.Markdown("# Unified ARP Tool", style={
-                "margin": "0",
-                "color": "white"
-            })
         
         # ====================
         # Main Content Area
