@@ -2,9 +2,6 @@
   <img src="assets/EIA Logo FINAL small_Dark Background.png" alt="EIA Logo" width="300">
   <h1>Unified ARP Tool</h1>
 </div>
-
-This serves as an example of using the SuzieQ REST API to gather data you might need to solve a specific problem.
-
 ## GOAL
 
 This repository serves as an example of:
@@ -17,9 +14,14 @@ This repository serves as an example of:
 This little APP does nothing different than the SuzieQ GUI or CLI does ... but think about what you could do with your own scripts and workflows with this data.   
 
 - What if you had to track the history of a particular MAC over the last week or months?
+- What if you needed to know if a device was configured to use DHCP?
 - What if you had other find a MAC that fell off the network (last seen), find the last switch and interface it was connected to and determine what MAC is on that interface now?
 
 The possibilities are endless...
+
+🎥 [SuzieQ Enterprise and the Unified ARP Table](http://https://vimeo.com/1130738176?fl=ml&fe=ec "SuzieQ Enterprise and the Unified ARP Table") ~15min
+
+📝 [A Unified ARP Table (and how to get one when you don’t have one)](https://gratuitous-arp.net/a-unified-arp-table-how-to-get-one-when-you-dont-have-one/)
 
 ## Features
 
